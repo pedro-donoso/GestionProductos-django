@@ -1,14 +1,20 @@
 from django.shortcuts import render, get_object_or_404, redirect
+
 from django.contrib import messages
+
 from django.contrib.auth.decorators import login_required
+
 from django.db.models import Q, Count
+
 from django.db import connection
 
 from .models import Producto, Categoria, Etiqueta
+
 from .forms import ProductoForm, CategoriaForm, EtiquetaForm
 
 
 @login_required
+
 def index(request):
     context = {
         'total_productos': Producto.objects.count(),
@@ -19,6 +25,7 @@ def index(request):
 
 
 @login_required
+
 def lista_productos(request):
     q = request.GET.get('q', '')
     productos = Producto.objects.all()
@@ -41,6 +48,7 @@ def lista_productos(request):
 
 
 @login_required
+
 def crear_producto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)
@@ -54,6 +62,7 @@ def crear_producto(request):
 
 
 @login_required
+
 def detalle_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
 
@@ -78,6 +87,7 @@ def detalle_producto(request, id):
 
 
 @login_required
+
 def editar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     initial = {}
@@ -102,6 +112,7 @@ def editar_producto(request, id):
 
 
 @login_required
+
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     if request.method == 'POST':
@@ -113,12 +124,14 @@ def eliminar_producto(request, id):
 
 # Categorías
 @login_required
+
 def lista_categorias(request):
     categorias = Categoria.objects.annotate(total_productos=Count('productos'))
     return render(request, 'categorias/lista.html', {'categorias': categorias})
 
 
 @login_required
+
 def crear_categoria(request):
     if request.method == 'POST':
         form = CategoriaForm(request.POST)
@@ -131,6 +144,7 @@ def crear_categoria(request):
 
 
 @login_required
+
 def editar_categoria(request, id):
     categoria = get_object_or_404(Categoria, id=id)
     if request.method == 'POST':
@@ -144,6 +158,7 @@ def editar_categoria(request, id):
 
 
 @login_required
+
 def eliminar_categoria(request, id):
     categoria = get_object_or_404(Categoria, id=id)
     if request.method == 'POST':
@@ -154,12 +169,14 @@ def eliminar_categoria(request, id):
 
 # Etiquetas
 @login_required
+
 def lista_etiquetas(request):
     etiquetas = Etiqueta.objects.annotate(total_productos=Count('productos'))
     return render(request, 'etiquetas/lista.html', {'etiquetas': etiquetas})
 
 
 @login_required
+
 def crear_etiqueta(request):
     if request.method == 'POST':
         form = EtiquetaForm(request.POST)
@@ -172,6 +189,7 @@ def crear_etiqueta(request):
 
 
 @login_required
+
 def editar_etiqueta(request, id):
     etiqueta = get_object_or_404(Etiqueta, id=id)
     if request.method == 'POST':
@@ -185,6 +203,7 @@ def editar_etiqueta(request, id):
 
 
 @login_required
+
 def eliminar_etiqueta(request, id):
     etiqueta = get_object_or_404(Etiqueta, id=id)
     if request.method == 'POST':
