@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Bienvenido al sistema de gestión de productos</h1>
+    <p>Usuario autenticado: {{ request.user.username }}</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <h3>Productos</h3>
+            <p>Total: {{ total_productos }}</p>
+            <a href="{% url 'lista_productos' %}" class="btn btn-primary">Ver productos</a>
+        </div>
+        <div class="col-md-4">
+            <h3>Categorías</h3>
+            <p>Total: {{ total_categorias }}</p>
+            <a href="{% url 'lista_categorias' %}" class="btn btn-secondary">Ver categorías</a>
+        </div>
+        <div class="col-md-4">
+            <h3>Etiquetas</h3>
+            <p>Total: {{ total_etiquetas }}</p>
+            <a href="{% url 'lista_etiquetas' %}" class="btn btn-info">Ver etiquetas</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
