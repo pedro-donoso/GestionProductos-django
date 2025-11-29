@@ -11,21 +11,12 @@
       {% csrf_token %}
       {{ form.as_p }}
 
-      <div class="mb-3">
-        <label for="id_dimensiones" class="form-label">Dimensiones</label>
-        <input type="text" name="dimensiones" id="id_dimensiones" class="form-control">
-      </div>
-      <div class="mb-3">
-        <label for="id_peso" class="form-label">Peso</label>
-        <input type="number" step="0.01" name="peso" id="id_peso" class="form-control">
-      </div>
-
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between mt-3">
         <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Volver</a>
         <button type="submit" class="btn btn-primary">Guardar</button>
       </div>
     </form>
+
   </div>
 </div>
 {% endblock %}
-
