@@ -14,6 +14,9 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = ['nombre', 'descripcion', 'precio', 'categoria', 'etiquetas']
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'rows': 4}),
+        }
 
     def save(self, commit=True):
         producto = super().save(commit=False)
@@ -43,7 +46,7 @@ class CategoriaForm(forms.ModelForm):
         model = Categoria
         fields = ['nombre', 'descripcion', 'etiquetas']
         widgets = {
-            'etiquetas':forms.CheckboxSelectMultiple(),
+            'etiquetas': forms.CheckboxSelectMultiple(),
         }
 
 
@@ -51,3 +54,4 @@ class EtiquetaForm(forms.ModelForm):
     class Meta:
         model = Etiqueta
         fields = ['nombre']
+
