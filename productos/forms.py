@@ -41,11 +41,13 @@ class ProductoForm(forms.ModelForm):
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
-        fields = ['nombre', 'descripcion']
+        fields = ['nombre', 'descripcion', 'etiquetas']
+        widgets = {
+            'etiquetas':forms.CheckboxSelectMultiple(),
+        }
 
 
 class EtiquetaForm(forms.ModelForm):
     class Meta:
         model = Etiqueta
         fields = ['nombre']
-

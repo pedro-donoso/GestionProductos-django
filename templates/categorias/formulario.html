@@ -1,14 +1,40 @@
 {% extends "base.html" %}
 
-{% block title %}Crear categoría{% endblock %}
+{% block title %}Formulario categoría{% endblock %}
 
 {% block content %}
-<h2>Crear categoría</h2>
+<div class="row">
+  <!-- Columna izquierda: formulario -->
+  <div class="col-md-6">
+    <h2 class="mb-3">Formulario categoría</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-    <a href="{% url 'lista_categorias' %}">Volver</a>
-</form>
+    <form method="post" class="card card-body">
+      {% csrf_token %}
+      {{ form.nombre.label_tag }}
+      {{ form.nombre }}
+
+      {{ form.descripcion.label_tag }}
+      {{ form.descripcion }}
+
+      <div class="d-flex justify-content-end mt-3">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Columna derecha: mostrar etiquetas (checkboxes del form) -->
+  <div class="col-md-6">
+    <h2 class="mb-3">Mostrar etiquetas</h2>
+
+    <div class="card">
+      <div class="card-body">
+        {% if form.etiquetas %}
+          {{ form.etiquetas }}
+        {% else %}
+          <p class="text-muted mb-0">No hay etiquetas.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,1 +1,22 @@
-<form method="post"> {% csrf_token %} {{ form.as_p }} <button type="submit">Guardar</button> </form>
+{% extends "base.html" %}
+
+{% block title %}Nuevo producto{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h2 class="mb-4">Nuevo producto</h2>
+
+    <form method="post" class="card card-body">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="d-flex justify-content-between mt-3">
+        <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Volver</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

@@ -3,25 +3,49 @@
 {% block title %}Detalle producto{% endblock %}
 
 {% block content %}
-<h2>Detalle de producto</h2>
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        Detalle de producto
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">{{ producto.nombre }}</h4>
 
-<p><strong>Nombre:</strong> {{ producto.nombre }}</p>
-<p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
-<p><strong>Precio:</strong> {{ producto.precio }}</p>
-<p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+        <p class="card-text">
+          <strong>Descripción:</strong> {{ producto.descripcion }}
+        </p>
+        <p class="card-text">
+          <strong>Precio:</strong> {{ producto.precio }}
+        </p>
+        <p class="card-text">
+          <strong>Categoría:</strong> {{ producto.categoria.nombre }}
+        </p>
 
-<p><strong>Etiquetas:</strong>
-    {% for etiqueta in producto.etiquetas.all %}
-        {{ etiqueta.nombre }}{% if not forloop.last %}, {% endif %}
-    {% empty %}
-        Sin etiquetas.
-    {% endfor %}
-</p>
+        <p class="card-text">
+          <strong>Etiquetas:</strong>
+          {% for etiqueta in producto.etiquetas.all %}
+            <span class="badge bg-secondary">{{ etiqueta.nombre }}</span>
+          {% empty %}
+            Sin etiquetas.
+          {% endfor %}
+        </p>
 
-{% if producto.detalles %}
-    <p><strong>Dimensiones:</strong> {{ producto.detalles.dimensiones }}</p>
-    <p><strong>Peso:</strong> {{ producto.detalles.peso }}</p>
-{% endif %}
-
-<a href="{% url 'lista_productos' %}">Volver</a>
+        {% if producto.detalles %}
+          <p class="card-text">
+            <strong>Dimensiones:</strong> {{ producto.detalles.dimensiones }}
+          </p>
+          <p class="card-text">
+            <strong>Peso:</strong> {{ producto.detalles.peso }}
+          </p>
+        {% endif %}
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Volver</a>
+        <a href="{% url 'editar_producto' producto.id %}" class="btn btn-primary">Editar</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+

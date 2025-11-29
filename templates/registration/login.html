@@ -3,15 +3,37 @@
 {% block title %}Iniciar sesión{% endblock %}
 
 {% block content %}
-<h2>Iniciar sesión</h2>
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2 class="mb-4 text-center">Iniciar sesión</h2>
 
-{% if form.errors %}
-    <p>Usuario o contraseña incorrectos.</p>
-{% endif %}
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        Usuario o contraseña incorrectos.
+      </div>
+    {% endif %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Entrar</button>
-</form>
+    <form method="post" class="card card-body">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+      <div class="mb-3">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+      </div>
+
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+      {% endif %}
+
+      <button type="submit" class="btn btn-primary w-100">
+        Entrar
+      </button>
+    </form>
+  </div>
+</div>
 {% endblock %}
+

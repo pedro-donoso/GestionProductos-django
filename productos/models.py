@@ -1,16 +1,17 @@
 from django.db import models
 
 
-class Categoria(models.Model):
+class Etiqueta(models.Model):
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField(blank=True)
 
     def __str__(self):
         return self.nombre
 
 
-class Etiqueta(models.Model):
-    nombre = models.CharField(max_length=50, unique=True)
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField(blank=True)
+    etiquetas = models.ManyToManyField(Etiqueta, blank=True)
 
     def __str__(self):
         return self.nombre
@@ -55,4 +56,3 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
-
