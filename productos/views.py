@@ -210,3 +210,9 @@ def eliminar_etiqueta(request, id):
         etiqueta.delete()
         return redirect('lista_etiquetas')
     return render(request, 'etiquetas/eliminar.html', {'etiqueta': etiqueta})
+
+
+@login_required
+
+def perfil(request):
+    return render(request, 'perfil.html')
